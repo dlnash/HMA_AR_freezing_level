@@ -53,14 +53,16 @@ print('Step 4: Saving filtered climatology...')
 clim_path = outdir + 'filtered_daily_mean_clim_' + dsname + fmt
 filtered_clim.load().to_netcdf(path=clim_path, mode = 'w', format='NETCDF4')
 
-## Calculate Anomalies
-print('Step 5: Calculating anomalies...')
-anomalies = ds.groupby('time.dayofyear') - filtered_clim
+### SKIP THESE STEPS
+### YOU CAN GET ANOMALIES BY LOADING ORIGINAL DATA AND SUBTRACTING THE FILTERED ANNUAL CLIM FILE
+# ## Calculate Anomalies
+# print('Step 5: Calculating anomalies...')
+# anomalies = ds.groupby('time.dayofyear') - filtered_clim
 # long_term_mean = anomalies.mean('time', skipna=True)
 
-## Write anomalies to yearly file
-print('Step 6: Writing anomalies to yearly files...')
-years, datasets = zip(*anomalies.groupby('time.year'))
-paths = [outdir +'anomalies/daily_filtered_anomalies_{0}_%s.nc'.format(dsname) % y for y in years]
-xr.save_mfdataset(datasets, paths)
+# ## Write anomalies to yearly file
+# print('Step 6: Writing anomalies to yearly files...')
+# years, datasets = zip(*anomalies.groupby('time.year'))
+# paths = [outdir +'anomalies/daily_filtered_anomalies_{0}_%s.nc'.format(dsname) % y for y in years]
+# xr.save_mfdataset(datasets, paths)
 

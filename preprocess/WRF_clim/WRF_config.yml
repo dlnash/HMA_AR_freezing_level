@@ -1,0 +1,25 @@
+# Filename:    WRF_config.yml
+# Author:      Deanna Nash, dlnash@ucsb.edu
+# Description: Dictionary of different variables to process for WRF data
+
+---
+ivt:
+    vars: 'ivt'
+    data: 'era5'
+    start_yr: 1979
+    end_yr: 2019
+    domain: 'hma'
+    resol: '05dg'
+    datadir: "/home/sbarc/students/nash/data/ERA5/ivt/6hr/"
+    outdir: "/home/sbarc/students/nash/data/ERA5/ivt/daily/"
+    
+prec:
+    vars: 'prec'
+    data: 'era5'
+    start_yr: 1979
+    end_yr: 2019
+    domain: 'hma'
+    resol: '025dg'
+    datadir: "/home/sbarc/students/nash/data/ERA5/prec/6hr/"
+    outdir: "/home/sbarc/students/nash/data/ERA5/prec/daily/"
+...
