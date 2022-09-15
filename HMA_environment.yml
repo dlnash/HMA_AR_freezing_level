@@ -1,0 +1,23 @@
+name: HMA-env
+channels:
+  - conda-forge
+  - defaults  
+dependencies:
+  - python
+  - pip
+  - ipykernel
+  - pyyaml
+  - numpy
+  - pandas
+  - xarray
+  - netcdf4
+  - cmocean
+  - matplotlib
+  - cartopy
+  - wrf-python
+  - dask
+  - scipy
+  - bs4
+  - urllib3
+  
+  - pip:

@@ -8,7 +8,6 @@ import yaml
 import xarray as xr
 import pandas as pd
 import numpy as np
-import dask
 from glob import glob
 import math
 from datetime import timedelta
@@ -127,61 +126,7 @@ class load_era5_ds:
 
     
             
-@dask.delayed
-def open_datefile_delayed(time):
-    return xr.open_dataset(glob('/home/sbarc/students/nash/data/M2I6NPANA.5.12.4/global_daily_concat/out.MERRA2.inst6_3d_ana_Np.%(Y)04d%(M)02d.nc'%
-                                    {'Y': time.year, 'M': time.month})[0],
-                               chunks={'time':1})
 
-def open_datefile(time, variable, var0):
-    # Prepare to open the file
-    var_data = open_datefile_delayed(time)[variable].data
-    # Get the size of the time axis - the number of days in each month
-    time_axis = pd.date_range(start = time - pd.tseries.offsets.MonthBegin(),
-                             end = time + pd.tseries.offsets.MonthBegin(),
-                             freq='1D',
-                             closed='left')
-
-    # Tell Dask the delayed function returns an array, and the size and type of that array
-    return dask.array.from_delayed(var_data, (time_axis.size, var0.lev.size, var0.lat.size, var0.lon.size), var0.dtype)
-
-def open_merra2(filename_pattern, variable):
-    files = sorted(glob(filename_pattern))
-    
-    # First and last dataset
-    ds0 = xr.open_dataset(files[0])
-    dsn = xr.open_dataset(files[-1])
-    
-    # Full time axis
-    # Time of each file in the series (one per day)
-    time = pd.date_range(ds0.time.values[0], dsn.time.values[-1], freq='1D')
-    
-    # First file's variable (for horizontal/vertical coordinates)
-    var0 = ds0[variable]
-    
-    # Time of each file in the series (one per month)
-    months = pd.date_range(ds0.time.values[0], dsn.time.values[-1], freq='1M')
-    
-    # Delayed opening of all the files using Dask
-    dask_var = dask.array.concatenate([open_datefile(t, variable, var0) for t in months], axis=0)
-
-    # Convert to xarray
-    var = xr.DataArray(dask_var,
-                          name = var0.name,
-                          attrs = var0.attrs,
-                          dims = ['time', 'lev', 'lat', 'lon'],
-                          coords = {
-                              'time': time,
-                              'lev': var0.lev,
-                              'lat': var0.lat,
-                              'lon': var0.lon,
-                          })
-    
-    # Cleanup
-    ds0.close()
-    dsn.close()
-    
-    return var
 
 
 def leap_year(year, calendar='standard'):

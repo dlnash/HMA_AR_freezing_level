@@ -410,6 +410,9 @@ def wrf_3hr_to_daily(output_varname, domain):
             if yr > 1979:
                 wrf = xr.where((wrf.time.dt.month == 4) & (wrf.time.dt.day == 1), np.nan, wrf)
                 
+            # # set negative snow values to 0
+            # wrf.snow.where((wrf.snow < 0), 0, wrf.snow)
+                
         else:
             # resample to daily
             wrf = tmp.resample(time="1D").mean('time')

@@ -1,7 +1,7 @@
 """
-Filename:    plotter.py
+Filename:    load_prec_data.py
 Author:      Deanna Nash, dlnash@ucsb.edu
-Description: Functions for plotting
+Description: Functions for loading precipitation data from ERA5, GPM, and WRF
 """
 
 # Import Python modules
