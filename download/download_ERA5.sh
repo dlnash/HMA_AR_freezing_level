@@ -6,7 +6,11 @@
 #
 ######################################################################
 
-### Step 1: Activate conda env
+### Activate bash
+
+source /home/sbarc/students/nash/miniconda3/etc/profile.d/conda.sh 
+
+### Activate conda env
 
 conda activate cds
 
@@ -22,8 +26,6 @@ ivt_case_200201 # hourly ivt and precip for 2002 AR case
 )
 
 # now loop through each configuration dictionary to download the ERA5 data
-
-##TODO figure out how to input argument into python run file
 
 for i in ${!array[*]}
 do 

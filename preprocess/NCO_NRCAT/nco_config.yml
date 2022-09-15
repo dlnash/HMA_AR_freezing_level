@@ -1,0 +1,68 @@
+# Filename:    ERA5_config.yml
+# Author:      Deanna Nash, dlnash@ucsb.edu
+# Description: Dictionary of different download variables/options for ERA5 - for use in conjunction with getERA5_batch.py
+
+---
+ivt:
+    vars: 'ivt'
+    data: 'era5'
+    start_yr: 1979
+    end_yr: 2019
+    domain: 'hma'
+    resol: '05dg'
+    datadir: "/home/sbarc/students/nash/data/ERA5/ivt/6hr/"
+    outdir: "/home/sbarc/students/nash/data/ERA5/ivt/daily/"
+    
+prec:
+    vars: 'prec'
+    data: 'era5'
+    start_yr: 1979
+    end_yr: 2019
+    domain: 'hma'
+    resol: '025dg'
+    datadir: "/home/sbarc/students/nash/data/ERA5/prec/6hr/"
+    outdir: "/home/sbarc/students/nash/data/ERA5/prec/daily/"
+    
+huvq:
+    vars: 'huvq'
+    data: 'era5'
+    start_yr: 1979
+    end_yr: 2019
+    domain: 'hma'
+    resol: '05dg'
+    datadir: "/home/sbarc/students/nash/data/ERA5/huvq/6hr/"
+    outdir: "/home/sbarc/students/nash/data/ERA5/huvq/daily/"
+    
+iwv: 
+    vars: 'iwv'
+    data: 'era5'
+    start_yr: 1979
+    end_yr: 2019
+    domain: 'hma'
+    resol: '05dg'
+    datadir: "/home/sbarc/students/nash/data/ERA5/iwv/6hr/"
+    outdir: "/home/sbarc/students/nash/data/ERA5/iwv/daily/"
+    
+wrf_sr: 
+    vars: 'sr'
+    data: 'wrf'
+    start_yr: 1979
+    end_yr: 2015
+    domain: 'd02'
+    resol: '6km'
+    datadir: "/home/sbarc/students/nash/data/wrf_hasia/d02/sr/3hr/"
+    outdir: "/home/sbarc/students/nash/data/wrf_hasia/d02/sr/daily/"
+    
+wrf_prec: 
+    vars: 'prec'
+    data: 'wrf'
+    start_yr: 1979
+    end_yr: 2015
+    domain: 'd02'
+    resol: '6km'
+    datadir: "/home/sbarc/students/nash/data/wrf_hasia/d02/prec/3hr/"
+    outdir: "/home/sbarc/students/nash/data/wrf_hasia/d02/prec/daily/"
+    
+    
+
+...
