@@ -123,7 +123,7 @@ def transition_matrix(x, states):
     return transc, probs
 
 
-def select_months(df, mon_s, mon_e):
+def select_months_df(df, mon_s, mon_e):
     # Select months
     if mon_s > mon_e:
         idx = (df.index.month >= mon_s) | (df.index.month <= mon_e)

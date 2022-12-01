@@ -462,7 +462,7 @@ def select_single_coord_WRF(filenames, varlst, slat, slon, dates):
     darray_final = []
 
     for i, wrfin in enumerate(filenames):
-        f = nc.Dataset(wrfin, 'r')
+        f = nc.Dataset(wrfin)
         # get the number of times in the current file
         ntimes = f.variables['Times'].shape[0]
         
