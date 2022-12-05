@@ -50,14 +50,14 @@ path_to_data = '/home/nash/DATA/data/'                                      # pr
 # output_varname = 'zerodegisotherm'
 # domain = 'd01'
 
-# ### IVT ###
-# output_varname = 'ivt'
-# domain = 'd01'
-# wrf.omp_set_num_threads(8)
+### IVT ###
+output_varname = 'ivt'
+domain = 'd01'
+wrf.omp_set_num_threads(8)
 
-### PRECIP ###
-output_varname = 'prec'
-domain = 'd02'
+# ### PRECIP ###
+# output_varname = 'prec'
+# domain = 'd02'
 
 # ### SR ###
 # output_varname = 'sr'
