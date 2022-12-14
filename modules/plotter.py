@@ -19,7 +19,7 @@ import matplotlib.patches as mpatches
 import matplotlib.animation as animation
 import pandas as pd
 
-def draw_basemap(ax, datacrs=ccrs.PlateCarree(), extent=None, xticks=None, yticks=None, grid=False, left_lats=True, right_lats=False, bottom_lons=True, mask_ocean=False):
+def draw_basemap(ax, datacrs=ccrs.PlateCarree(), extent=None, xticks=None, yticks=None, grid=False, left_lats=True, right_lats=False, bottom_lons=True, top_lons=False, mask_ocean=False):
     """
     Creates and returns a background map on which to plot data. 
     
@@ -96,7 +96,7 @@ def draw_basemap(ax, datacrs=ccrs.PlateCarree(), extent=None, xticks=None, ytick
     else:
         gl = ax.gridlines(crs=mapcrs, draw_labels=True,
                       linewidth=.5, color='black', alpha=0.5, linestyle='--')
-        gl.top_labels = False
+        gl.top_labels = top_lons
         gl.left_labels = left_lats
         gl.right_labels = right_lats
         gl.bottom_labels = bottom_lons

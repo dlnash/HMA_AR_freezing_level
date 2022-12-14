@@ -8,22 +8,20 @@
 
 # Input parameters
 maindir="/home/sbarc/students/nash/repositories/HMA_AR_freezing_level/figs/" # main figure folder
-finaldir="/home/sbarc/students/nash/repositories/HMA_AR_freezing_level/figs/final_figs_ch3/" # final figure folder
+finaldir="/home/sbarc/students/nash/repositories/HMA_AR_freezing_level/figs/final_figs/" # final figure folder
 
 # fig names in main folder
 array=(
 wrf_geogrid_norris
-arfreq_AR_trend_mon
 ivt_AR_trend_DJF_portrait
 zero_isotherm_height_AR_trend_DJF_portrait
 freezing_sr_diff_composite_portrait
-ivt_precip_scatter_era5_max_3col
+wrf_scatter_rosemax
+synoptic_daily
 WRF_prec_summary
-jan2002_summary_daily
+feb1998_summary_daily
 feb2010_summary_daily
-IVT_hovmoller
-prec_hovmoller
-time_height
+wvf_climatology
 
 
 )
@@ -40,8 +38,6 @@ array2=(
 8
 9
 10
-11
-12
 )
 
 
@@ -54,28 +50,20 @@ do
     cp -v ${infile} ${outfile}
 done
 
-### supplemental figs
-supp_array=(
-composite_ar_types_bias
-jan2002_era5_IVT_6hrly
-feb2010_era5_IVT_6hrly
-jan2002_WRF_prec_3hr
-feb2010_WRF_prec_3hr
-)
+# ### supplemental figs
+# supp_array=(
+# composite_ar_types_bias
+# )
 
-## new names to be given
-supp_array2=(
-1
-2
-3
-4
-5
-)
-for i in ${!supp_array[*]}
-do 
-    infile="${maindir}${supp_array[$i]}.png"
-    outfile="${finaldir}figS${supp_array2[$i]}.png"
-#     echo "${infile} to ${outfile}"
-    cp -v ${infile} ${outfile}
-done
+# ## new names to be given
+# supp_array2=(
+# 1
+# )
+# for i in ${!supp_array[*]}
+# do 
+#     infile="${maindir}${supp_array[$i]}.png"
+#     outfile="${finaldir}figS${supp_array2[$i]}.png"
+# #     echo "${infile} to ${outfile}"
+#     cp -v ${infile} ${outfile}
+# done
 
