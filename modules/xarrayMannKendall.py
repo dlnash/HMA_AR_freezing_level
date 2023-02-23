@@ -257,3 +257,17 @@ def init(__name__):
         MK_trends = MK_class.compute()
 
 init(__name__)
+
+def compute_MK_trend_da(da):
+    # rename coords lat,lon to y,x because that is what the function needs
+    da = da.rename({'lat': 'y', 'lon': 'x'})
+
+    # rechunk dask version of data so it is a single chunk
+    da_new = da.chunk({'time': -1})
+    # # load data since since it can fit into memory
+    da_new = da_new.load()
+    
+    # Compute trends using Mann-Kendall test - takes roughly 2 seconds!
+    MK_class = Mann_Kendall_test(da_new, 'time')
+    MK_class = MK_class.compute() 
+    return MK_class

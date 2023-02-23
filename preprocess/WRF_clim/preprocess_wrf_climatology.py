@@ -40,20 +40,20 @@ path_to_data = '/home/nash/DATA/data/'                                      # pr
 # output_varname = 'geopotential'
 # domain = 'd01'
 
-# ### ZERO DEGREE ISOTHERM ###
-# # variable to interpolate
-# var1_name = 'z'
-# # vertical variable to interpolate to (e.g. pressure, height)
-# var2_name = 'tc'
-# # level to interpolate to
-# levs = [0]
-# output_varname = 'zerodegisotherm'
-# domain = 'd01'
-
-### IVT ###
-output_varname = 'ivt'
+### ZERO DEGREE ISOTHERM ###
+# variable to interpolate
+var1_name = 'z'
+# vertical variable to interpolate to (e.g. pressure, height)
+var2_name = 'tc'
+# level to interpolate to
+levs = [0]
+output_varname = 'zerodegisotherm'
 domain = 'd01'
-wrf.omp_set_num_threads(8)
+
+# ### IVT ###
+# output_varname = 'ivt'
+# domain = 'd01'
+# wrf.omp_set_num_threads(8)
 
 # ### PRECIP ###
 # output_varname = 'prec'

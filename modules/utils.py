@@ -10,8 +10,7 @@ import pandas as pd
 import numpy as np
 from glob import glob
 import math
-from datetime import timedelta
-
+from datetime import timedelta, datetime
 
 def slope_2pts(x1, y1, x2, y2):
     deltay = (y2-y1)
@@ -204,7 +203,7 @@ def add_days_to_date(date, days):
 
     return added_date
 
-def subtract_days_from_date(date, days):
+def subtract_days_from_date(date, days, normalized=False):
     """Subtract days from a date and return the date.
     
     Args: 
@@ -216,6 +215,12 @@ def subtract_days_from_date(date, days):
     """
     
     subtracted_date = pd.to_datetime(date) - timedelta(days=days)
-    subtracted_date = subtracted_date.strftime("%Y-%m-%d")
+    
+    if normalized == True:
+        subtracted_date = subtracted_date.strftime("%Y-%m-%d")
+    else:
+        # convert the timestamp to a datetime object in the local timezone
+        # subtracted_date = datetime.fromtimestamp(subtracted_date)
+        subtracted_date = subtracted_date
 
     return subtracted_date

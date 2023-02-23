@@ -485,21 +485,29 @@ def select_single_coord_WRF(filenames, varlst, slat, slon, dates):
         for j, file_timeidx in enumerate(idx):
             print(wrfin, 'timeidx is ', file_timeidx)
             
-            # make cache for current time step
+            # ## get the index of the lat/lon values
+            # x_y = wrf.ll_to_xy(f, slat, slon, timeidx=file_timeidx, squeeze=True, meta=True, stagger=None, as_int=True)
+            # x = x_y.values[0] # index of lon value
+            # y = x_y.values[1] # index of lat value
+            
+            # make cache for current time step at location x,y
             my_cache = wrf.extract_vars(f, file_timeidx, ("P", "PSFC", "PB", "PH", "PHB",
                                                           "T", "QVAPOR", "HGT", "U", "V",
                                                           "W"))
+
             # loop through variables
             darrays = []
             for i, var in enumerate(varlst):
+                # print(var)
                 v = wrf.getvar(f, var, file_timeidx, cache=my_cache)
+                # v = wrf.getvar(f, var, file_timeidx)[:,y,x]
                 # remove projection from attributes
                 del v.attrs['projection']
                 darrays.append(v)
 
             # merge list of data arrays to single dataset for current timestep
             ds = xr.merge(darrays)
-
+            
             # convert ds into cf compliant so we can select given lat/lon coord
             ds = preprocess_wrf_cfcompliant(ds)
             ds = ds.sel(lat=slat, lon=slon, method="nearest")

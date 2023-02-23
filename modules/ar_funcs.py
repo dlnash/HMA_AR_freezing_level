@@ -392,3 +392,16 @@ def calc_seasonal_contribution_ar_mask(ds_list):
         frac.append((clim.ar_prec/clim.prec)*100)
         
     return clim_lst, frac, std_lst
+
+def combine_ar_ds_df(ds, df):
+    # Combine AR Cat data w/ WRF data
+    # Add ar time series to the WRF dataset
+    ds['ar'] = ('time', df.AR_CAT)
+    ds = ds.set_coords('ar')
+
+    ds['trackID'] = ('time', df.kidmap)
+    ds = ds.set_coords('trackID')
+    idx = (ds.ar >= 1)
+    # select AR days
+    ds_ar = ds.sel(time=idx)
+    return ds_ar
