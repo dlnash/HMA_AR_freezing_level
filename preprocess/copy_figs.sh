@@ -17,9 +17,9 @@ ivt_AR_trend_DJF_portrait
 zero_isotherm_height_AR_trend_DJF_portrait
 freezing_sr_diff_composite_portrait
 wrf_scatter_rosemax
-synoptic_daily
 WRF_prec_summary
-feb1998_summary_daily
+synoptic_daily
+jan1989_summary_daily
 feb2010_summary_daily
 wvf_climatology
 

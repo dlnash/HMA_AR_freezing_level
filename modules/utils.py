@@ -27,7 +27,7 @@ def find_intersection_two_lines(m1, b1, m2, b2):
     
     return [x, y]
 
-def find_perpindicular_line(x1, y1, x2, y2, newx):
+def find_perpindicular_line(x1, y1, x2, y2, newx, x3=68.5):
     
     # first calculate slope and y intercept of existing line
     b, slope = slope_2pts(x1, y1, x2, y2)
@@ -37,8 +37,7 @@ def find_perpindicular_line(x1, y1, x2, y2, newx):
     newy = slope*newx + b
     # now find the new line b
     newb = newy - newslope*newx
-    # x3 = 65.0 # furthest longitude west in outer domain
-    x3 = 68.5 # furthest longitude west in inner domain
+
     y3 = newslope*x3 + newb
     # hlat, hlon, tlat, tlon
     line = [y3, x3, newy, newx]
