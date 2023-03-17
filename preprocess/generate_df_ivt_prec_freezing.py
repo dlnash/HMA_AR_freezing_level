@@ -207,7 +207,7 @@ merged_data = pd.merge(duration_df, landslide_df, how='outer', on='trackID')
 idx = merged_data['ar_cat'] > 0
 merged_data = merged_data.loc[idx]
 
-def ar_ivt(df, ds, domains, clim_mean):
+def ar_ivt(df, ds, domains, clim_mean, clim_std):
     '''Calculate maximum IVT for a subregion in a ds and append to dataframe.
      For each range of AR event dates, we find the maximum IVT for the duration of the AR for every grid cell. 
     '''
@@ -228,9 +228,10 @@ def ar_ivt(df, ds, domains, clim_mean):
         
         ## remove climatology from freezing level 
         clim_ar = clim_mean.sel(AR_CAT = arcat, lat=slice(bnds[2], bnds[3]), lon=slice(bnds[0], bnds[1]))
-        tmp['z_new'] = tmp.z - clim_ar.z
+        std_ar = clim_std.sel(AR_CAT = arcat, lat=slice(bnds[2], bnds[3]), lon=slice(bnds[0], bnds[1]))
+        tmp['z_new'] = (tmp.z - clim_ar.z)/clim_std.z # standardized anomalies
         ## average freezing level over time, lat, lon
-        freeze = tmp['z_new'].mean(['time', 'lat', 'lon']).values
+        freeze = tmp['z_new'].max(['time']).mean(['lat', 'lon']).values
         freeze_vals.append(freeze)
         
         ### localized IVT maxima during event
@@ -394,10 +395,11 @@ ext3 = [90, 99, 24, 30] # Eastern precip anomalies
 region_name = ['western', 'northwestern', 'eastern']
 domains = [ext1, ext2, ext3]
 clim_mean = xr.open_dataset('/home/sbarc/students/nash/data/wrf_hasia/d01/zerodegisotherm_ar_clim_new.nc') # freezing level climatology
+clim_std = xr.open_dataset('/home/sbarc/students/nash/data/wrf_hasia/d01/zerodegisotherm_ar_std_new.nc') # freezing level standard deviation
 
 print('Processing IVT and freezing level...')
 ## For each row, calculate the maximum IVT within the region between start and end
-ivt_final = ar_ivt(merged_data, wrf_d01, domains, clim_mean)
+ivt_final = ar_ivt(merged_data, wrf_d01, domains, clim_mean, clim_std)
 
 print('Processing precipitation...')
 ## For each row, calculate the maximum precip within the region between start and end
@@ -410,4 +412,4 @@ merged_data['freeze'] = ivt_final[2]
 merged_data['prec'] = prec_final
 
 # Export dataframes as csv
-merged_data.to_csv(path_to_out + '{0}_ivt_ar_types_freezing_level_max_prec_20230217.csv'.format(ssn))
+merged_data.to_csv(path_to_out + '{0}_ivt_ar_types_freezing_level_max_prec_20230317.csv'.format(ssn))
