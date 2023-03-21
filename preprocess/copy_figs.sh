@@ -67,3 +67,6 @@ done
 #     cp -v ${infile} ${outfile}
 # done
 
+### zip files together
+cd ${finaldir}
+zip final_figs fig*.png

@@ -229,10 +229,10 @@ def ar_ivt(df, ds, domains, clim_mean, clim_std):
         ## remove climatology from freezing level 
         clim_ar = clim_mean.sel(AR_CAT = arcat, lat=slice(bnds[2], bnds[3]), lon=slice(bnds[0], bnds[1]))
         std_ar = clim_std.sel(AR_CAT = arcat, lat=slice(bnds[2], bnds[3]), lon=slice(bnds[0], bnds[1]))
-        tmp['z_new'] = (tmp.z - clim_ar.z)/clim_std.z # standardized anomalies
+        tmp['z_new'] = (tmp.z - clim_ar.z)/std_ar.z # standardized anomalies
         ## average freezing level over time, lat, lon
-        freeze = tmp['z_new'].max(['time']).mean(['lat', 'lon']).values
-        freeze_vals.append(freeze)
+        freeze = tmp['z_new'].max(['time'], skipna=True).mean(['lat', 'lon']).values
+        freeze_vals.append(freeze.tolist())
         
         ### localized IVT maxima during event
         # event_max = tmp.where(tmp.ivt==tmp.ivt.max(), drop=True).squeeze()
@@ -246,7 +246,7 @@ def ar_ivt(df, ds, domains, clim_mean, clim_std):
         ivtdir_vals.append(ivtdir.item())
         ivt_vals.append(event_max.ivt.values.tolist())
         
-        # pull freezing level anomaly where ivt is max
+        # # pull freezing level anomaly where ivt is max
         # freeze_vals.append(event_max.z_new.values)
         
     final = [ivtdir_vals, ivt_vals, freeze_vals]
