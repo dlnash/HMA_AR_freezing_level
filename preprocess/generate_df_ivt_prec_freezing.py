@@ -19,7 +19,7 @@ from metpy.units import units
 sys.path.append('../modules')
 
 # Import my modules
-from ar_funcs import get_topo_mask
+from ar_funcs import get_topo_mask, HMA_subregions
 from timeseries import select_months_ds, select_months_df
 
 # Set up paths
@@ -388,9 +388,9 @@ prec = ds_lst[1]
 wrf_d01 = xr.combine_by_coords([ds_lst[0], ds_lst[2]]) 
 
 # latmin, latmax, lonmin, lonmax
-ext1 = [71, 79, 32, 37] # Western precip anomalies
-ext2 = [69, 74, 37, 40] # Northwestern precip anomalies
-ext3 = [90, 99, 24, 30] # Eastern precip anomalies
+ext1 = HMA_subregions['Western'] # Western precip anomalies
+ext2 = HMA_subregions['Northwestern'] # Northwestern precip anomalies
+ext3 = HMA_subregions['Eastern'] # Eastern precip anomalies
 
 region_name = ['western', 'northwestern', 'eastern']
 domains = [ext1, ext2, ext3]

@@ -11,6 +11,14 @@ import numpy as np
 import xarray as xr
 import pandas as pd
 
+ext1 = [71, 79, 32, 37] # Western precip anomalies
+ext2 = [69, 74, 37, 40] # Northwestern precip anomalies
+ext3 = [90, 99, 24, 30] # Eastern precip anomalies
+
+## CONSTANTS
+HMA_subregions = {'Northwestern': [69, 74, 37, 40],
+                  'Western': [71, 79, 32, 37],
+                  'Eastern': [90, 99, 24, 30]}
 
 ## FUNCTIONS
 def get_topo_mask(regridlats, regridlons):
