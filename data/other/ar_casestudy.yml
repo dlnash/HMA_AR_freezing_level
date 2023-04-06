@@ -1,0 +1,371 @@
+# Filename:    ar_casestudy.yml
+# Author:      Deanna Nash, dlnash@ucsb.edu
+# Description: Dates and types of AR case study
+
+---
+jan1989:
+    ar_type: 1
+    year: 1989
+    month: jan
+    ar_ID: [31016]
+    start_date: '1989-01-03'
+    end_date: '1989-01-06'
+    start_h: '00:00'
+    end_h: '12:00'
+    wrf_files: ["/home/sbarc/students/nash/data/HMA_freezing_level_data/dryad/WRF_norris/wrfout_d02_1988-12-31_03:00:00", 
+                "/home/sbarc/students/nash/data/HMA_freezing_level_data/dryad/WRF_norris/wrfout_d02_1989-01-05_03:00:00"]
+    wrf_files2: ["/home/sbarc/students/nash/data/HMA_freezing_level_data/dryad/WRF_norris/wrfout_d01_1988-12-31_03:00:00", 
+                 "/home/sbarc/students/nash/data/HMA_freezing_level_data/dryad/WRF_norris/wrfout_d01_1989-01-05_03:00:00"]
+    mhlat: [33.5]
+    mhlon: [72.0]
+    mtlat: [25.0]
+    mtlon: [60.2]
+    ext2: [69.0, 80.0, 33.0, 40.]
+    ext3: [60.2, 85.0, 20.0, 45.]
+    landslide_loc: [0., 0.]
+    notes:
+    
+feb2010:
+    ar_type: 1
+    year: 2010
+    month: feb
+    ar_ID: [97756]
+    start_date: '2010-02-05'
+    end_date: '2010-02-08'
+    start_h: '00:00'
+    end_h: '18:00'
+    wrf_files: ["/home/sbarc/students/nash/data/HMA_freezing_level_data/dryad/WRF_norris/wrfout_d02_2010-02-04_03:00:00"]
+    wrf_files2: ["/home/sbarc/students/nash/data/HMA_freezing_level_data/dryad/WRF_norris/wrfout_d01_2010-02-04_03:00:00"]
+    landslide_loc: [75.8011, 33.1595]
+    notes:
+    mhlat: [36., 34., 34.5, 35.0]
+    mhlon: [69., 75., 72.5, 75.5]
+    mtlat: [30., 25.5, 25., 22.]
+    mtlon: [60.2, 60.2, 60.2, 60.2]
+    ext2: [69.0, 82.0, 30.0, 40.]
+    ext3: [60.2, 85.0, 20.0, 45.]
+    
+april2016:
+    ar_type: 2
+    year: 2016
+    month: apr
+    start_date: '2016-03-28'
+    end_date: '2016-04-04'
+    start_h: '00:00'
+    end_h: '06:00'
+    wrf_files: ["/home/hasia/", 
+                "/home/hasia/", 
+                "/home/hasia/"]
+    notes: technically considered hazardous
+                
+feb2013:
+    ar_type: 2
+    year: 2013
+    month: feb
+    start_date: '2013-01-31'
+    end_date: '2013-02-03'
+    start_h: '00:00'
+    end_h: '00:00'
+    wrf_files: ["/home/hasia/2012/wrfout_d02_2013-01-25_03:00:00", 
+                "/home/hasia/2012/wrfout_d02_2013-01-30_03:00:00", 
+                "/home/hasia/2012/wrfout_d02_2013-02-04_03:00:00"]
+    notes: technically considered beneficial
+    
+mar1980:
+    ar_type: 3
+    year: 1980
+    month: mar
+    start_date: '1980-03-16'
+    end_date: '1980-03-17'
+    start_h: '06:00'
+    end_h: '12:00'
+    wrf_files: ["/home/hasia/1979/wrfout_d02_1980-03-15_03:00:00"]
+    notes: 
+    
+feb2010_3km:
+    ar_type: 1
+    year: 2010
+    month: feb
+    start_date: '2010-02-06'
+    end_date: '2010-02-09'
+    start_h: '00:00'
+    end_h: '00:00'
+    wrf_files: ["/home/sbarc/students/nash/data/wrf_hasia/20210928_case/wrfout_d02.2010-02-05_00:00:00"]
+    wrf_files2: ["/home/sbarc/students/nash/data/wrf_hasia/20210928_case/wrfout_d01.2010-02-05_00:00:00"]
+    landslide_loc: [75.8011, 33.1595]
+    notes: 
+    
+jan1991:
+    ar_type: 1
+    year: 1991
+    month: jan
+    ar_ID: [37457]
+    start_date: '1991-01-24'
+    end_date: '1991-01-28'
+    start_h: '06:00'
+    end_h: '12:00'
+    wrf_files: ["/home/hasia/1990/wrfout_d02_1991-01-20_03:00:00",
+                "/home/hasia/1990/wrfout_d02_1991-01-25_03:00:00"]
+    wrf_files2: ["/home/hasia/1990/wrfout_d01_1991-01-20_03:00:00",
+                 "/home/hasia/1990/wrfout_d01_1991-01-25_03:00:00"]
+    landslide_loc: 
+    notes:
+    mhlat: [36., 34., 34.5, 35.0]
+    mhlon: [69., 75., 72.5, 75.5]
+    mtlat: [30., 25.5, 25., 22.]
+    mtlon: [60.2, 60.2, 60.2, 60.2]
+    ext2: [69.0, 82.0, 30.0, 40.]
+    ext3: [60.2, 85.0, 20.0, 45.]
+    
+feb2011:
+    ar_type: 1
+    year: 2011
+    month: feb
+    ar_ID: [101168]
+    start_date: '2011-02-10'
+    end_date: '2011-02-15'
+    start_h: '12:00'
+    end_h: '00:00'
+    wrf_files: ["/home/hasia/2010/wrfout_d02_2011-02-09_03:00:00",
+                "/home/hasia/2010/wrfout_d02_2011-02-14_03:00:00"]
+    wrf_files2: ["/home/hasia/2010/wrfout_d01_2011-02-09_03:00:00",
+                "/home/hasia/2010/wrfout_d01_2011-02-14_03:00:00"]
+    mhlat: [33.0, 33.0, 33.0, 32.0, 31.5, 33.0]
+    mhlon: [65.0, 66.0, 76.5, 77.5, 79.0, 82.0]
+    mtlat: [24.0, 24.0, 23.0, 19.0, 17.0, 17.0]
+    mtlon: [60.2, 60.2, 60.2, 61.0, 65.0, 72.0]
+    landslide_loc: [75.8101, 33.18]
+    ext2: [69.0, 90.0, 27.0, 40.]
+    ext3: [60.2, 85.0, 20.0, 45.]
+    notes: 
+    
+feb2011b:
+    ar_type: 1
+    year: 2011
+    month: feb
+    ar_ID: [101040]
+    start_date: '2011-01-31'
+    end_date: '2011-02-04'
+    start_h: '18:00'
+    end_h: '00:00'
+    wrf_files: ["/home/hasia/2010/wrfout_d02_2011-01-30_03:00:00",
+                "/home/hasia/2010/wrfout_d02_2011-02-04_03:00:00"]
+    wrf_files2: ["/home/hasia/2010/wrfout_d01_2011-01-30_03:00:00",
+                "/home/hasia/2010/wrfout_d01_2011-02-04_03:00:00"]
+    mhlat: [33.0, 35.0, 35.5, 35.5]
+    mhlon: [67.0, 67.0, 72.5, 72.5]
+    mtlat: [25.5, 25.5, 25.0, 25.0]
+    mtlon: [60.2, 60.2, 60.2, 60.2]
+    ext2: [69.0, 80.0, 33.0, 40.]
+    ext3: [60.2, 85.0, 20.0, 45.]
+    landslide_loc: [0., 0.]
+    notes: 
+    
+feb2011c:
+    ar_type: 1
+    year: 2011
+    month: feb
+    ar_ID: [101129]
+    start_date: '2011-02-06'
+    end_date: '2011-02-07'
+    start_h: '18:00'
+    end_h: '00:00'
+    wrf_files: ["/home/hasia/2010/wrfout_d02_2011-02-04_03:00:00"]
+    wrf_files2: ["/home/hasia/2010/wrfout_d01_2011-02-04_03:00:00"]
+    mhlat: [33.0, 35.0, 35.5, 35.5]
+    mhlon: [67.0, 67.0, 72.5, 72.5]
+    mtlat: [25.5, 25.5, 25.0, 25.0]
+    mtlon: [60.2, 60.2, 60.2, 60.2]
+    ext2: [69.0, 80.0, 33.0, 40.]
+    ext3: [60.2, 85.0, 20.0, 45.]
+    landslide_loc: [0., 0.]
+    notes: 
+    
+jan2002:
+    ar_type: 1
+    year: 2002
+    month: jan
+    ar_ID: [71513]
+    start_date: '2002-01-10'
+    end_date: '2002-01-13'
+    start_h: '00:00'
+    end_h: '12:00'
+    wrf_files: ["/home/hasia/2001/wrfout_d02_2002-01-10_03:00:00"]
+    wrf_files2: ["/home/hasia/2001/wrfout_d01_2002-01-10_03:00:00"]
+    mhlat: [33.5, 35.0, 35.5]
+    mhlon: [67.0, 70.0, 75.5]
+    mtlat: [26.5, 27.0, 25.0]
+    mtlon: [60.2, 60.2, 60.2]
+    ext2: [69.0, 82.0, 30.0, 40.]
+    ext3: [60.2, 85.0, 20.0, 45.]
+    landslide_loc: [0., 0.]
+    notes: 
+    
+dec2000:
+    ar_type: 1
+    year: 2000
+    month: dec
+    ar_ID: [68106]
+    start_date: '2000-12-15'
+    end_date: '2000-12-17'
+    start_h: '12:00'
+    end_h: '00:00'
+    wrf_files: ["/home/hasia/2000/wrfout_d02_2000-12-11_03:00:00",
+                 "/home/hasia/2000/wrfout_d02_2000-12-16_03:00:00"]
+    wrf_files2: ["/home/hasia/2000/wrfout_d01_2000-12-11_03:00:00",
+                 "/home/hasia/2000/wrfout_d01_2000-12-16_03:00:00"]
+    mhlat: [35.0, 33.0]
+    mhlon: [75.0, 75.0]
+    mtlat: [25.0, 24.0]
+    mtlon: [60.2, 60.2]
+    ext2: [69.0, 80.0, 33.0, 40.]
+    ext3: [60.2, 85.0, 20.0, 45.]
+    landslide_loc: [0., 0.]
+    notes:
+
+feb2003:
+    ar_type: 1
+    year: 2003
+    month: feb
+    ar_ID: [74922, 74983]
+    start_date: '2003-02-16'
+    end_date: '2003-02-18'
+    start_h: '00:00'
+    end_h: '00:00'
+    wrf_files: ["/home/hasia/2002/wrfout_d02_2003-02-14_03:00:00"]
+    wrf_files2: ["/home/hasia/2002/wrfout_d01_2003-02-14_03:00:00"]
+    mhlat: [34.0, 33.0, 33.0, 27.0]
+    mhlon: [79.0, 79.0, 79.0, 80.0]
+    mtlat: [24.5, 23.0, 21.0, 21.0]
+    mtlon: [60.2, 60.2, 60.2, 70.0]
+    ext2: [69.0, 90.0, 25.0, 40.]
+    ext3: [60.2, 85.0, 20.0, 45.]
+    landslide_loc: [0., 0.]
+    notes:
+    
+feb2001:
+    ar_type: 1
+    year: 2001
+    month: feb
+    ar_ID: [68607]
+    start_date: '2001-02-21'
+    end_date: '2001-02-23'
+    start_h: '00:00'
+    end_h: '00:00'
+    wrf_files: ["/home/hasia/2000/wrfout_d02_2001-02-19_03:00:00"]
+    wrf_files2: ["/home/hasia/2000/wrfout_d01_2001-02-19_03:00:00"]
+    mhlat: [33.5]
+    mhlon: [72.0]
+    mtlat: [25.0]
+    mtlon: [60.2]
+    ext2: [69.0, 80.0, 33.0, 40.]
+    ext3: [60.2, 85.0, 20.0, 45.]
+    landslide_loc: [0., 0.]
+    notes:
+    
+feb1998:
+    ar_type: 1
+    year: 1998
+    month: feb
+    ar_ID: [59206]
+    start_date: '1998-02-12'
+    end_date: '1998-02-15'
+    start_h: '00:00'
+    end_h: '12:00'
+    wrf_files: ["/home/hasia/1997/wrfout_d02_1998-02-09_03:00:00",
+                 "/home/hasia/1997/wrfout_d02_1998-02-14_03:00:00"]
+    wrf_files2: ["/home/hasia/1997/wrfout_d01_1998-02-09_03:00:00",
+                 "/home/hasia/1997/wrfout_d01_1998-02-14_03:00:00"]
+    mhlat: [33.5]
+    mhlon: [72.0]
+    mtlat: [25.0]
+    mtlon: [60.2]
+    ext2: [69.0, 80.0, 33.0, 40.]
+    ext3: [60.2, 85.0, 20.0, 45.]
+    landslide_loc: [0., 0.]
+    notes:
+    
+feb1988:
+    ar_type: 1
+    year: 1988
+    month: feb
+    ar_ID: [28230]
+    start_date: '1988-02-17'
+    end_date: '1988-02-20'
+    start_h: '18:00'
+    end_h: '00:00'
+    wrf_files: ["/home/hasia/1987/wrfout_d02_1988-02-14_03:00:00",
+                 "/home/hasia/1987/wrfout_d02_1988-02-19_03:00:00"]
+    wrf_files2: ["/home/hasia/1987/wrfout_d01_1988-02-14_03:00:00",
+                 "/home/hasia/1987/wrfout_d01_1988-02-19_03:00:00"]
+    mhlat: [33.5]
+    mhlon: [72.0]
+    mtlat: [25.0]
+    mtlon: [60.2]
+    ext2: [69.0, 80.0, 33.0, 40.]
+    ext3: [60.2, 85.0, 20.0, 45.]
+    landslide_loc: [0., 0.]
+    notes:
+    
+jan2006:
+    ar_type: 1
+    year: 2006
+    month: jan
+    ar_ID: [84561]
+    start_date: '2006-01-26'
+    end_date: '2006-01-28'
+    start_h: '00:00'
+    end_h: '12:00'
+    wrf_files: ["/home/hasia/2005/wrfout_d02_2006-01-25_03:00:00"]
+    wrf_files2: ["/home/hasia/2005/wrfout_d01_2006-01-25_03:00:00"]
+    mhlat: [33.5]
+    mhlon: [72.0]
+    mtlat: [25.0]
+    mtlon: [60.2]
+    ext2: [69.0, 80.0, 33.0, 40.]
+    ext3: [60.2, 85.0, 20.0, 45.]
+    landslide_loc: [0., 0.]
+    notes:
+    
+jan1992:
+    ar_type: 1
+    year: 1992
+    month: jan
+    ar_ID: [40590]
+    start_date: '1992-01-22'
+    end_date: '1992-01-26'
+    start_h: '00:00'
+    end_h: '00:00'
+    wrf_files: ["/home/hasia/1991/wrfout_d02_1992-01-20_03:00:00", 
+                "/home/hasia/1991/wrfout_d02_1992-01-25_03:00:00"]
+    wrf_files2: ["/home/hasia/1991/wrfout_d01_1992-01-20_03:00:00",
+                 "/home/hasia/1991/wrfout_d01_1992-01-25_03:00:00"]
+    mhlat: [33.5]
+    mhlon: [72.0]
+    mtlat: [25.0]
+    mtlon: [60.2]
+    ext2: [69.0, 80.0, 33.0, 40.]
+    ext3: [60.2, 85.0, 20.0, 45.]
+    landslide_loc: [0., 0.]
+    notes:
+    
+dec1990:
+    ar_type: 1
+    year: 1990
+    month: dec
+    ar_ID: [37230]
+    start_date: '1990-12-26'
+    end_date: '1990-12-30'
+    start_h: '00:00'
+    end_h: '12:00'
+    wrf_files: ["/home/hasia/1990/wrfout_d02_1990-12-26_03:00:00"]
+    wrf_files2: ["/home/hasia/1990/wrfout_d01_1990-12-26_03:00:00"]
+    mhlat: [33.5]
+    mhlon: [72.0]
+    mtlat: [25.0]
+    mtlon: [60.2]
+    ext2: [69.0, 80.0, 33.0, 40.]
+    ext3: [60.2, 85.0, 20.0, 45.]
+    landslide_loc: [0., 0.]
+    notes:
+...
