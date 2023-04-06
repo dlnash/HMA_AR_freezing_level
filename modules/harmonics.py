@@ -76,12 +76,12 @@ def calc_filtered_climatology(domain, varname):
     '''Functions to filter annual climatology of daily gridded/time series wrf data using harmonics.'''
 
     ### Constants ###
-    outdir = '/work2/08540/dlnash/frontera/wrf_preprocessed_data/wrf_6km/{0}/{1}/'.format(domain, varname)
-    datadir = '/work2/08540/dlnash/frontera/wrf_preprocessed_data/wrf_6km/{0}/{1}/daily/'.format(domain, varname)
+    outdir = '/home/sbarc/students/nash/data/HMA_freezing_level_data/preprocessed/{0}/'.format(varname)
+    datadir = '/home/sbarc/students/nash/data/HMA_freezing_level_data/preprocessed/{0}/'.format(varname)
     fmt = '.nc'
 
     print('Step 1: Reading data...')
-    filename_pattern = datadir + 'out.wrf6km.{0}.daily_*.nc'.format(varname)
+    filename_pattern = datadir + 'out.wrf.{0}.{1}.daily_*.nc'.format(domain, varname)
     ds = xr.open_mfdataset(filename_pattern, parallel=False)
 
     print('ds size in GB {:0.2f}\n'.format(ds.nbytes / 1e9))

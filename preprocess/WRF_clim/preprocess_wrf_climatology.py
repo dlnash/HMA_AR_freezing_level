@@ -19,11 +19,11 @@ sys.path.append(os.getcwd())
 # Path to modules
 sys.path.append('../../modules')
 # Import my modules
-from wrf_funcs_preprocess import preprocess_prec, preprocess_ivt, preprocess_SR, preprocess_pressure_lev_var
+from wrf_funcs_preprocess import preprocess_prec, preprocess_ivt, preprocess_pressure_lev_var
 
 ## Set up paths
 path_to_wrf = '/home/hasia/'
-path_to_data = '/home/nash/DATA/data/'                                      # project data -- read only
+path_to_data = '/home/sbarc/students/nash/data/'                                      # project data -- read only
 
 # command for selecting variables **include XTIME,XLONG,XLAT in var list
 # ncks -v varname1,varname2 input_file output_file
@@ -40,31 +40,28 @@ path_to_data = '/home/nash/DATA/data/'                                      # pr
 # output_varname = 'geopotential'
 # domain = 'd01'
 
-### ZERO DEGREE ISOTHERM ###
-# variable to interpolate
-var1_name = 'z'
-# vertical variable to interpolate to (e.g. pressure, height)
-var2_name = 'tc'
-# level to interpolate to
-levs = [0]
-output_varname = 'zerodegisotherm'
-domain = 'd01'
+# ### ZERO DEGREE ISOTHERM ###
+# # variable to interpolate
+# var1_name = 'z'
+# # vertical variable to interpolate to (e.g. pressure, height)
+# var2_name = 'tc'
+# # level to interpolate to
+# levs = [0]
+# output_varname = 'zerodegisotherm'
+# domain = 'd01'
 
 # ### IVT ###
 # output_varname = 'ivt'
 # domain = 'd01'
 # wrf.omp_set_num_threads(8)
 
-# ### PRECIP ###
-# output_varname = 'prec'
-# domain = 'd02'
-
-# ### SR ###
-# output_varname = 'sr'
-# domain = 'd02'
+### PRECIP ###
+# includes total precipitation and fraction of frozen precipitation
+output_varname = 'prec'
+domain = 'd02'
 
 ### START PROGRAM ###
-start_yr = 2015
+start_yr = 1979
 end_yr = 2015
 
 ## Loop through all above years
@@ -86,9 +83,6 @@ for year in np.arange(start_yr, end_yr+1):
 
         elif output_varname == 'ivt':
             ds = preprocess_ivt(filenames)
-            
-        elif output_varname == 'sr':
-            ds = preprocess_SR(filenames)
 
         else:
             ds = preprocess_pressure_lev_var(filenames, var1_name, var2_name, levs)
@@ -112,8 +106,6 @@ for year in np.arange(start_yr, end_yr+1):
 
         elif output_varname == 'ivt':
             ds = preprocess_ivt(filenames)
-        elif output_varname == 'sr':
-            ds = preprocess_SR(filenames)
 
         else:
             ds = preprocess_pressure_lev_var(filenames, var1_name, var2_name, levs)
@@ -153,9 +145,6 @@ for year in np.arange(start_yr, end_yr+1):
         elif output_varname == 'ivt':
             ds1 = preprocess_ivt(filenames)
             ds2 = preprocess_ivt(filenames2)
-        elif output_varname == 'sr':
-            ds1 = preprocess_SR(filenames)
-            ds2 = preprocess_SR(filenames2)
 
         else:
             ds1 = preprocess_pressure_lev_var(filenames, var1_name, var2_name, levs)
@@ -176,5 +165,5 @@ for year in np.arange(start_yr, end_yr+1):
         ds = xr.merge([ds1, ds2])
     
     # write to netCDF
-    fname = os.path.join(path_to_data, 'wrf_hasia/{0}/{1}/3hr/tmp_{2}.nc').format(domain, output_varname, str(year))
+    fname = os.path.join(path_to_data, 'HMA_freezing_level_data/dryad/{1}/out.wrf.{0}.{1}.3hr_{2}.nc').format(domain, output_varname, str(year))
     ds.to_netcdf(path=fname, mode = 'w', format='NETCDF4')

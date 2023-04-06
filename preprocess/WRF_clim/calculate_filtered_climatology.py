@@ -11,15 +11,17 @@ import os, sys
 # import personal modules
 
 # Path to modules
-sys.path.append('../modules')
+sys.path.append('../../modules')
 
 # Import my modules
 from wrf_funcs_preprocess import wrf_3hr_to_daily
 from harmonics import calc_filtered_climatology
+from ar_funcs import calc_ar_climatology
 
 ## variable/data to process
-domain = 'd01'
-varname = 'geopotential'
+domain = 'd02'
+varname = 'prec'
 
 wrf_3hr_to_daily(varname, domain)
 calc_filtered_climatology(domain, varname)
+calc_ar_climatology(domain, varname)

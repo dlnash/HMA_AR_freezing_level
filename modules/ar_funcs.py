@@ -413,3 +413,73 @@ def combine_ar_ds_df(ds, df):
     # select AR days
     ds_ar = ds.sel(time=idx)
     return ds_ar
+
+
+def calc_ar_climatology(domain, varname):
+    '''Functions to calculate climatology of variable for ar days only.'''
+
+    ### Constants ###
+    outdir = '/home/sbarc/students/nash/data/HMA_freezing_level_data/preprocessed/{0}/'.format(varname)
+    datadir = '/home/sbarc/students/nash/data/HMA_freezing_level_data/preprocessed/{0}/'.format(varname)
+    fmt = '.nc'
+
+    print('Step 1: Reading data...')
+    filename_pattern = datadir + 'out.wrf.{0}.{1}.daily_*.nc'.format(domain, varname)
+    ds = xr.open_mfdataset(filename_pattern, parallel=False)
+
+    print('ds size in GB {:0.2f}\n'.format(ds.nbytes / 1e9))
+    # normalize datetime
+    ds['time'] = ds.indexes['time'].normalize()
+    
+    # load entire ds into memory (this is fine it is only 25 GB)
+    ds = ds.load()
+    
+    ## Merge with AR dates
+    print('Step 2: Merging with AR dates...')
+    filepath = '../../data/other/AR-types_ALLDAYS.csv'
+    df = pd.read_csv(filepath)
+
+    # set times as index
+    df = df.rename(columns={'Unnamed: 0': 'date'})
+    df = df.set_index(pd.to_datetime(df['date']))
+
+    # select only ssn months
+    idx = (df.index.month >= 12) | (df.index.month <= 2)
+    df = df.loc[idx]
+
+    # normalize datetimes to 00 UTC
+    df.index = df.index.strftime("%Y-%m-%d")
+
+    # set to days available in WRF
+    idx = (df.index >= '1979-12-01') & (df.index <= '2015-03-31')
+    df = df.loc[idx]
+
+    # # select only ar days
+    idx = (df['AR_CAT'] > 0)
+    df = df.loc[idx]
+
+    # get list of dates that ar is present
+    ar_dates = pd.to_datetime(df.index).values
+    
+    # subset non-anomalies to just ar days
+    ar_daily = ds.sel(time = ar_dates)
+
+    # Combine AR Cat and ivt data w/ WRF data
+    colnames = ['AR_CAT']
+    for i, col in enumerate(colnames):
+        ar_daily[col] = ('time', df[col])
+        ar_daily = ar_daily.set_coords(col)
+
+    ## calculate average during AR days broken down by type
+    print('Step 3: Calculating annual climatology...')
+    # compute climatology for AR types
+    clim_mean = ar_daily.groupby('AR_CAT').mean('time', skipna=True).compute()
+    clim_std = ar_daily.groupby('AR_CAT').std('time', skipna=True).compute()
+
+    ## Save Daily Climatology as netcdf
+    clim_path = outdir + 'ar_mean_clim_' + varname + fmt
+    clim_mean.to_netcdf(path=clim_path, mode = 'w', format='NETCDF4')
+
+    ## Save Standard Deviation as netcdf
+    std_path = outdir + 'ar_std_clim_' + varname + fmt
+    clim_std.to_netcdf(path=std_path, mode = 'w', format='NETCDF4')

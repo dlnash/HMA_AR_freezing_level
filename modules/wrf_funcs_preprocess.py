@@ -156,7 +156,7 @@ def preprocess_ivt(filenames):
 def preprocess_prec(filenames):
     """preprocess_prec
     
-    Returns a ds object (xarray) including total precipitation accumulated, snow height/depth, snow accumulated
+    Returns a ds object (xarray) including total precipitation accumulated and fraction of frozen preciptiation
     
     Parameters
     ----------
@@ -166,13 +166,12 @@ def preprocess_prec(filenames):
     Returns
     -------
     ds : ds object
-        includes variables prec accumulated, snow height, snow accumulated
+        includes variables prec accumulated and SR "fraction of frozen preciptiation"
     
     """
     # arrays to append data
     prec_final = []
-    snowh_final = []
-    snow_final = []
+    sr_final = []
     da_time = []
 
     for i, wrfin in enumerate(filenames):
@@ -187,22 +186,20 @@ def preprocess_prec(filenames):
             rainnc = wrf.getvar(f, 'RAINNC', file_timeidx) # units: total mm accumulated
             # add rainc + rainnc for total mm accumulated since model initialization (3/31/2012 in this case)
             prec = rainc + rainnc
-            snowh = wrf.getvar(f, 'SNOWH', file_timeidx) # units: m depth
-            snow = wrf.getvar(f, 'SNOW', file_timeidx) # units: kg m^2 = mm
+            sr = wrf.getvar(f, 'SR', file_timeidx) # units: - fraction of frozen precipitation
 
             # get current time
-            da_time.append(snow.Time.values)
+            da_time.append(sr.Time.values)
 
             # put values into preassigned arrays
             prec_final.append(prec)
-            snowh_final.append(snowh)
-            snow_final.append(snow)
+            sr_final.append(sr)
 
         f.close()
 
     # get lats and lons
-    wrflats = snow['XLAT'].isel(west_east=0).values
-    wrflons = snow['XLONG'].isel(south_north=0).values
+    wrflats = sr['XLAT'].isel(west_east=0).values
+    wrflons = sr['XLONG'].isel(south_north=0).values
     
     # convert lats/lons to 4-byte floats (this alleviates striping issue)
     wrflats = np.float32(wrflats)
@@ -210,8 +207,7 @@ def preprocess_prec(filenames):
 
     # put into a dataset
     var_dict = {'prec': (['time', 'lat', 'lon'], prec_final),
-                'snowh': (['time', 'lat', 'lon'], snowh_final), 
-                'snow': (['time', 'lat', 'lon'], snow_final)}
+                'sr': (['time', 'lat', 'lon'], sr_final)}
     ds = xr.Dataset(var_dict,
                     coords={'time': (['time'], da_time),
                             'lat': (['lat'], wrflats),
@@ -296,61 +292,6 @@ def preprocess_pressure_lev_var(filenames, var1_name, var2_name, levs):
     
     return ds
 
-def preprocess_SR(filenames):
-    """preprocess_prec
-    
-    Returns a ds object (xarray) including the fraction of frozen precipitation (unitless)
-    
-    Parameters
-    ----------
-    filenames : list
-        list of wrf filenames to process
-  
-    Returns
-    -------
-    ds : ds object
-        includes variables SR "fraction of frozen preciptiation"
-    
-    """
-    # arrays to append data
-    sr_final = []
-    da_time = []
-
-    for i, wrfin in enumerate(filenames):
-        f = nc.Dataset(wrfin, 'r')
-        # get the number of times in the current file
-        ntimes = f.variables['Times'].shape[0]
-
-        # now loop through the total number of times for this file and append data:
-        for file_timeidx in range(ntimes):
-            print(wrfin, 'timeidx is ', file_timeidx)
-            sr = wrf.getvar(f, 'SR', file_timeidx) # units: unitless
-
-            # get current time
-            da_time.append(sr.Time.values)
-
-            # put values into preassigned arrays
-            sr_final.append(sr)
-
-        f.close()
-
-    # get lats and lons
-    wrflats = sr['XLAT'].isel(west_east=0).values
-    wrflons = sr['XLONG'].isel(south_north=0).values
-    
-    # convert lats/lons to 4-byte floats (this alleviates striping issue)
-    wrflats = np.float32(wrflats)
-    wrflons = np.float32(wrflons)
-
-    # put into a dataset
-    var_dict = {'sr': (['time', 'lat', 'lon'], sr_final)}
-    ds = xr.Dataset(var_dict,
-                    coords={'time': (['time'], da_time),
-                            'lat': (['lat'], wrflats),
-                            'lon': (['lon'], wrflons)})
-
-    return ds
-
 def preprocess_wrf_cfcompliant(ds):
     # clean up protocol adapted from http://gallery.pangeo.io/repos/NCAR/notebook-gallery/notebooks/Run-Anywhere/WRF/wrf_ex.html
 
@@ -382,11 +323,11 @@ def wrf_3hr_to_daily(output_varname, domain):
     start_yr = 1979
     end_yr = 2015
 
-    path_to_data = '/scratch1/08540/dlnash/data/wrf_6km/'
-    path_to_out = '/work2/08540/dlnash/frontera/data/wrf_preprocessed_data/wrf_6km/'
+    path_to_data = '/home/sbarc/students/nash/data/HMA_freezing_level_data/dryad/{0}/'.format(output_varname)
+    path_to_out = '/home/sbarc/students/nash/data/HMA_freezing_level_data/preprocessed/{0}/'.format(output_varname)
 
     ## pull wrflats and wrflons from first file
-    fname = path_to_out + '{0}/{1}/3hr/tmp_1979.nc'.format(domain, output_varname)
+    fname = path_to_data + 'out.wrf.{0}.{1}.3hr_1979.nc'.format(domain, output_varname)
     tmp = xr.open_dataset(fname)
 
     ## assign those lats to the other ds when you loop
@@ -395,23 +336,28 @@ def wrf_3hr_to_daily(output_varname, domain):
 
     ## Loop through all above years
     for yr in np.arange(start_yr, end_yr+1):
-        filename = path_to_out + '{0}/{1}/3hr/tmp_{2}.nc'.format(domain, output_varname, str(yr))
+        print("Preprocessing {0}...".format(yr))
+        filename = path_to_data + 'out.wrf.{0}.{1}.3hr_{2}.nc'.format(domain, output_varname, str(yr))
 
         tmp = xr.open_dataset(filename, chunks={'time': 360})
         
         if output_varname == 'prec':
-            tmp = tmp.sel(time=tmp.time.dt.hour == 0)
+            tmp2 = tmp.prec.sel(time=tmp.time.dt.hour == 0)
 
             # # calculate mm per day rain values
             # # rain at 00:00 utc next day - rain at 00:00 UTC current day
-            wrf = tmp.shift(time=-1) - tmp # if in xarray
+            wrf1 = tmp2.shift(time=-1) - tmp2 # if in xarray
 
             ## bc of spin up and how the data was generated set April 1 values to nan
             if yr > 1979:
-                wrf = xr.where((wrf.time.dt.month == 4) & (wrf.time.dt.day == 1), np.nan, wrf)
-                
-            # # set negative snow values to 0
-            # wrf.snow.where((wrf.snow < 0), 0, wrf.snow)
+                wrf1 = xr.where((wrf1.time.dt.month == 4) & (wrf1.time.dt.day == 1), np.nan, wrf1)
+            
+            ## pull out and average SR
+            wrf2 = tmp.sr.resample(time="1D").mean('time')
+            
+            
+            ## merge wrf1 and wrf2
+            wrf = xr.Dataset({"prec": wrf1, "sr": wrf2})
                 
         else:
             # resample to daily
@@ -422,12 +368,12 @@ def wrf_3hr_to_daily(output_varname, domain):
         if yr == 1979:
             wrf = wrf
         elif yr == 2015:
-            wrf = wrf
+            wrf = wrf.sel(time=slice('{0}-01-01'.format(yr), '{0}-03-31'.format(yr)))
         else:
             wrf = wrf.sel(time=slice('{0}-01-01'.format(yr), '{0}-12-31'.format(yr)))
 
         # write to netCDF
-        fname = os.path.join(path_to_out, '{0}/{1}/daily/out.wrf6km.{1}.daily_{2}.nc').format(domain, output_varname, str(yr))
+        fname = os.path.join(path_to_out, 'out.wrf.{0}.{1}.daily_{2}.nc').format(domain, output_varname, str(yr))
         wrf.to_netcdf(path=fname, mode = 'w', format='NETCDF4')
         
 def select_single_coord_WRF(filenames, varlst, slat, slon, dates):
