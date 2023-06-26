@@ -163,14 +163,7 @@ The following describes the data used for each of the notebooks in `../analysis/
 └── DJF_ivt_ar_types_freezing_level_max_prec.csv
 ```
 
-7. fig07_synoptic_plots_all.ipynb
-
-- "/home/nash/DATA/data/ERA5/ivt/6hr/era5_hma_05dg_6hr_ivt_2010.nc"
-- "/home/nash/DATA/data/ERA5/ivt/6hr/era5_hma_05dg_6hr_ivt_1989.nc"
-- "/home/nash/DATA/data/ERA5/huvq/6hr/era5_hma_05dg_6hr_huvq_2010.nc"
-- "/home/nash/DATA/data/ERA5/huvq/6hr/era5_hma_05dg_6hr_huvq_1989.nc"
-- "/home/nash/DATA/data/wrf_hasia/d02/prec/3hr/tmp_2010.nc"
-- "/home/nash/DATA/data/wrf_hasia/d02/prec/3hr/tmp_1989.nc"
+7. fig07-8_synoptic_plots_all.ipynb
 
 ```
 ../data/dryad
@@ -188,7 +181,7 @@ The following describes the data used for each of the notebooks in `../analysis/
 
 ```
 
-8. fig08-09_cross_section_static.ipynb
+8. fig09-10_cross_section_static.ipynb
 
 ```
 ../data/dryad
@@ -213,8 +206,6 @@ The following describes the data used for each of the notebooks in `../analysis/
 ```
 
 9. fig10_wvf_climatology.ipynb
-
-
 
 ```
 ../data/dryad
