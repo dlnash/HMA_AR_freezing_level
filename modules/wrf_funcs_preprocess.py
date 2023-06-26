@@ -67,7 +67,7 @@ def preprocess_ivt(filenames):
     
     """
     # levels to interpolate to
-    interp_levs = [1000, 975, 950, 925, 900, 875, 850, 825, 800, 775, 750, 700, 650, 600, 550, 500, 450, 400, 250, 300]
+    interp_levs = [1000, 975, 950, 925, 900, 875, 850, 825, 800, 775, 750, 700, 650, 600, 550, 500, 450, 400, 350, 300]
     
     # arrays to append data
     ivtu_final = []

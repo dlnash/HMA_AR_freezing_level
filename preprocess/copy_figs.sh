@@ -18,9 +18,10 @@ zero_isotherm_height_AR_trend_DJF_portrait
 freezing_sr_diff_composite_portrait
 wrf_scatter_rosemax
 WRF_prec_summary
-synoptic_daily
-jan1989_summary_daily
-feb2010_summary_daily
+synoptic_daily_jan1989
+synoptic_daily_feb2010
+cross-section_summary_IVT_WV-flux
+cross-section_summary_prec_mixing_ratio
 wvf_climatology
 
 
@@ -38,6 +39,7 @@ array2=(
 8
 9
 10
+11
 )
 
 

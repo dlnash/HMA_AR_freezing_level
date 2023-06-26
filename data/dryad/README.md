@@ -6,7 +6,7 @@ This study uses 36 years of Climate Forecast System Reanalysis (CFSR)[^1] dynami
 
 ## Description of the data and file structure
 
-ivt.zip contains annual netCDF (.nc) files (from 1979 to 2015) with WRF outer domain (20 km) 3-hourly integrated water vapor transport magnitude (ivt, kg m<sup>-1</sup> s<sup>-1</sup>), zonal IVT (ivtu, kg m<sup>-1</sup> s<sup>-1</sup>), meridional IVT (ivtv, kg m<sup>-1</sup> s<sup>-1</sup>), and integrated water vapor (iwv, mm). 
+ivt_split.zip contains annual netCDF (.nc) files (from 1979 to 2015) with WRF outer domain (20 km) 3-hourly integrated water vapor transport magnitude (ivt, kg m<sup>-1</sup> s<sup>-1</sup>), zonal IVT (ivtu, kg m<sup>-1</sup> s<sup>-1</sup>), meridional IVT (ivtv, kg m<sup>-1</sup> s<sup>-1</sup>), and integrated water vapor (iwv, mm). To unzip the split zip files, first combine the zip files into a single zip archive by typing `zip -F ivt_split.zip --out single-archive.zip` then use unzip to open the combined archive `unzip single-archive.zip`.
 
 prec.zip contains annual .nc files (from 1979 to 2015) with WRF inner domain (6.7 km) 3-hourly accumulated precipitation (prec, mm) and fraction of frozen precipitation (sr, unitless). 
 

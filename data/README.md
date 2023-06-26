@@ -22,7 +22,7 @@ A subset of preprocessed WRF data available on Dryad for download.
 
 ```
 .
-├── ivt.zip
+├── ivt_split.zip
 │   ├── out.wrf.d01.ivt.3hr_1979.nc
 │   └── out.wrf.d01.ivt.3hr_*.nc
 ├── prec.zip
